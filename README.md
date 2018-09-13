@@ -13,6 +13,7 @@ They are also available on amazon, or from other sellers.
 If you've obtained the quadcopter through the workshop, it should have been modified with a 4-pin header across the UART programming pins. 
 The header is polarized, so take careful note of its orientation on the board. If yours is the opposite direction of what is shown here, you'll want to reverse the order of Jumper Wire connections to the ST-Link.
 That header should look like this once installed: 
+
 ![Placeholder image](/images/placeholder.jpg)
 
 ###Transmitter
@@ -81,7 +82,37 @@ Small philips-head screwdriver. Can be used for removing the screw that holds th
 Probably the most valuable piece of this kit. Take care not to lose him. What would you do without his slightly walleyed smirk?
 ![Placeholder image of knight](/images/placeholder.jpg)
 
+
 ##Compiling firmware
+
+Much of this section is taken from the [source thread on RC groups](https://www.rcgroups.com/forums/showthread.php?2877480-Compilation-instructions-for-silverware#post37391059) and mirrored here for readibility.
+
+###Software installation:
+
+## Install Keil MDK from http://www2.keil.com/mdk5  
+
+There ought to be a button labelled `Download MDK v*`. At the time of writing, it looks like this:  
+[!An image of the download button](/images/download.png)
+Note: right click the downloaded file and select "run as administrator", or there may not be enough folder access rights.
+
+
+Assuming the installation process was performed correctly, we will now use Keil to compile a "binary", file containing the firmware of the quadcopter. This step will transform the C code that we've written into a binary format grokkable by the quadcopter's cpu.
+
+1: Download the project files from this repo, if you haven't already. I'm not going to link it, because you're already here.  
+Unzip to a folder of your choice.
+
+2: Open project file `/Silverware/silverware.uvprojx` in the Keil uVision program. This can be done by double-clicking on the file. 
+    If you'd prefer, there's also `/Silverware/acro_only.uvprojx` already included for those who wish. If you don't know what "Acro Only" means offhand, I'd recommend using `silverware.uvprojx` to begin with.  
+If this is your first time opening the project, Keil uVision may ask to install device support if not present. If so, click "install", and wait for completion, which may take some time as it is downloaded.  
+This should install the `STM32F030` CPU support pack. There's a package installer tool in the IDE that can be tried as well, should the autodownload fail.
+
+
+3: Change the settings to your preference, generally using `config.h`.  
+    For workshop-defaults, you'll want to enable `#USE_STOCK_TX` on line 120, as well as set the protocol to one of the Bayang ones. It should be good as-is.
+
+4: Compile the project and make sure there are zero errors reported in the lower part of the window. Use either the "build" toolbar icon, menu "project/build target" or "F7" hotkey. Keil will also save changes to files at his point.
+
+5: Open the folder "/Silverware/Objects" ( name may change slightly) and find file "bwhoop.hex". This is the firmware file, to be flashed to the quadcopter using the "st-link utility" program.
 
 ##Flashing firmware
 
