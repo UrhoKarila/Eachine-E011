@@ -87,57 +87,116 @@ Probably the most valuable piece of this kit. Take care not to lose him. What wo
 
 Much of this section is taken from the [source thread on RC groups](https://www.rcgroups.com/forums/showthread.php?2877480-Compilation-instructions-for-silverware#post37391059) and mirrored here for readibility.
 
-###Software installation:
+##Software installation:
 
-## Install Keil MDK from http://www2.keil.com/mdk5  
+###Install Keil MDK from http://www2.keil.com/mdk5  
 
 There ought to be a button labelled `Download MDK v*`. At the time of writing, it looks like this:  
 [!An image of the download button](/images/download.png)
 Note: right click the downloaded file and select "run as administrator", or there may not be enough folder access rights.
 
+###Download and install the "St-link Utility" from https://www.st.com/en/development-tools/stsw-link004.html
+This will also install drivers for the st-link, and is used to upload the precompiled firmware to the board.
+
+The download link is near the bottom of the page, and looks like this: 
+![An image of the STLink download](/images/st-download.png)
+
+
+##Firmware Compilation
 
 Assuming the installation process was performed correctly, we will now use Keil to compile a "binary", file containing the firmware of the quadcopter. This step will transform the C code that we've written into a binary format grokkable by the quadcopter's cpu.
 
-1: Download the project files from this repo, if you haven't already. I'm not going to link it, because you're already here.  
+1. Download the project files from this repo, if you haven't already. I'm not going to link it, because you're already here.  
 Unzip to a folder of your choice.
 
-2: Open project file `/Silverware/silverware.uvprojx` in the Keil uVision program. This can be done by double-clicking on the file. 
+2. Open project file `/Silverware/silverware.uvprojx` in the Keil uVision program. This can be done by double-clicking on the file. 
     If you'd prefer, there's also `/Silverware/acro_only.uvprojx` already included for those who wish. If you don't know what "Acro Only" means offhand, I'd recommend using `silverware.uvprojx` to begin with.  
 If this is your first time opening the project, Keil uVision may ask to install device support if not present. If so, click "install", and wait for completion, which may take some time as it is downloaded.  
 This should install the `STM32F030` CPU support pack. There's a package installer tool in the IDE that can be tried as well, should the autodownload fail.
 
 
-3: Change the settings to your preference, generally using `config.h`.  
+3. Change the settings to your preference, generally using `config.h`.  
     For workshop-defaults, you'll want to enable `#USE_STOCK_TX` on line 120, as well as set the protocol to one of the Bayang ones. It should be good as-is.
 
-4: Compile the project and make sure there are zero errors reported in the lower part of the window. Use either the "build" toolbar icon, menu "project/build target" or "F7" hotkey. Keil will also save changes to files at his point.
+4. Compile the project and make sure there are zero errors reported in the lower part of the window. Use either the "build" toolbar icon, menu "project/build target" or "F7" hotkey. Keil will also save changes to files at his point.
 
-5: Open the folder "/Silverware/Objects" ( name may change slightly) and find file "bwhoop.hex". This is the firmware file, to be flashed to the quadcopter using the "st-link utility" program.
+5. Open the folder "/Silverware/Objects" ( name may change slightly) and find file "bwhoop.hex". This is the firmware file, to be flashed to the quadcopter in the next step.
 
 ##Flashing firmware
 
+Much of this section is taken from the [source thread on RC groups](https://www.rcgroups.com/forums/showthread.php?2876797-Boldclash-bwhoop-B-03-opensource-firmware) and mirrored here for readibility.
+
+Flashing is the process of saving the opensource firmware to the board, so that it can be used. It's not very hard, and the board usually does not break unless power is connected incorrectly or the step in bold is performed differently.
+
+###Preparing the hardware:
+
+The quad is flashed using a st-link v2, included with your kit. The FC is fitted with a socket:
+
+![Picture of socket](/images/placeholder.jpg)
+
+The Header Jumper and Jumper Wires should be connected to the ST-Link. The Header Jumper wires should (through the Jumper Wires) be connected as such:  
+|Color    | Pin  |
+|---------|------|
+| Red     | 5V or disconnected  |
+| Black   | Gnd  |
+| Yellow  |      |
+| White   |      |
+
+If you're using the included Header Jumper, it should plug neatly into the Jumper Wires. When attached, it should look like this:
+
+![Placeholder image](/images/placeholder.jpg)
+
+*Do Not* connect both the +5V pin if the battery is also connected. This *Will* damage the board
+
+If connector is not available, wires can be soldered to the board instead. Note that the CLK and DAT labels on the Flight Controller are reversed.
+3 wires are needed, Ground ( GND) , CLK ( SWCLK on stlink) and DAT( SWDIO on stlink). Connect the pads / plug to the equivalent place on the st-link: GnD <-> Gnd , DAT <-> SWCLK and CLK <-> SWDIO.
+
+
+At this stage, we'll assume you have a compiled firmware you wish to flash. This may be from the Firmware Compilation step above, or it may be a precompiled firmware. Either way, make sure you have something to upload after erasing the factory firmware.
+
+###Erasing the factory firmware:
+
+If this is the first time you're flashing new firmware, the factory firmware has to be erased. This step only needs to be performed once, it does not need to be done every time the board is flashed.
+
+The pristine factory firmware cannot be restored after this step. However, there is a factory-like firmware included in the `bin` folder of this repo.
+
+1. Connect the board to the st-link. Do not connect the 5V pin from the ST-Link - we'll be getting power from a battery for this step.
+    You need to complete the next step within a few seconds because current firmware re purpuses the programming port to control a camera ( they share the pins). If you can't connect, cycle power and try again.
+
+2. Using the St-utility, connect to the board. You should get a message saying the board is protected ( "Cannot read memory").
+
+3. In the Target menu, select "Option bytes".
+
+    1. Select "Level 0" ( Should have been Level 1 originally )
+    Do not select an incorrect Level and apply it as it will kill the board.
+
+	2. **Double check you have "level 0" selected**
+
+	3. Click Apply ( this will erase the factory firmware - click cancel instead to abort)
+
+4. At this the factory firmware should erased. Click disconnect, and remove power from the board. You can now proceed to the next part.
+
+###Flashing a new firmware:
+
+1. Connect the st-link to the board, and connect power. This may use either the 5V pin or the battery, **but not both**.
+
+2. Open the St-link Utility program , and press the "connect" button. The program should show connection progress in the bottom part.
+
+3. In the target menu, select "Program and verify" or "program". A popup will ask for the file to program. Select the firmware downloaded or compiled `.hex` firmware file here. After the file selection, click start, and wait a few seconds for the process to complete.
+
+The new firmware is flashed at this point, and it can be used.
 
 
 The board pads ( near the middle ) are *reverse* labeled. The 4 pin connector is *correctly* labeled.
 
 Thanks to rcg user "NotfastEnough" for figuring out the hardware connctions
 
-### Factory firmware
-The factory firmware can be flashed back after using this, it's in the bin folder
 
 ### Gestures
 The firmware uses "gestures" to activate certain features, currently accelerometer calibration, acro / level mode switch and pid gestures ( field tuning )
 
 Gestures reference:
 http://sirdomsen.diskstation.me/dokuwiki/doku.php?id=gestures
-
-### Flashing the firmware
-Flashing instructions ( uses St-link Utility program ):
-https://www.rcgroups.com/forums/showthread.php?2876797-Boldclash-bwhoop-B-03-opensource-firmware
-
-Compiling instructions ( uses Keil uVision IDE):
-https://www.rcgroups.com/forums/showthread.php?2877480-Compilation-instructions-for-silverware#post37391059
-
 
 ### Wiki
 http://sirdomsen.diskstation.me/dokuwiki/doku.php?id=start
