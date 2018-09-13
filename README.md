@@ -35,9 +35,9 @@ Replacement chargers should be available with most replacement batteries should 
 ![Charger placeholder](/images/placeholder.jpg)
 
 ### ST-Link
-The ST-Link v2 is used to write data from the computer to the quadcopter. These are widely available and can be found, for example, [here](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.Xst-link.TRS0&_nkw=st-link&_sacat=0)
+The ST-Link v2 is used to write data from the computer to the quadcopter. These are widely available and can be found, for example, [here](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.XST-Link.TRS0&_nkw=ST-Link&_sacat=0)
 
-![Picture of STLinkv2](/images/st-link-v2-programmer-for-stm8-stm32.jpg)
+![Picture of STLinkv2](/images/ST-Link-v2-programmer-for-stm8-stm32.jpg)
 
 As part of the utility of the ST-Link, there are two sets of wires to keep track of.
 
@@ -98,8 +98,8 @@ There ought to be a button labelled `Download MDK v*`. At the time of writing, i
 
 Note: right click the downloaded file and select "run as administrator", or there may not be enough folder access rights.
 
-### Download and install the "St-link Utility" from https://www.st.com/en/development-tools/stsw-link004.html
-This will also install drivers for the st-link, and is used to upload the precompiled firmware to the board.
+### Download and install the "ST-Link Utility" from https://www.st.com/en/development-tools/stsw-link004.html
+This will also install drivers for the ST-Link, and is used to upload the precompiled firmware to the board.
 
 The download link is near the bottom of the page, and looks like this: 
 
@@ -116,13 +116,14 @@ Unzip to a folder of your choice.
 2. Open project file `/Silverware/silverware.uvprojx` in the Keil uVision program. This can be done by double-clicking on the file. 
 
     * If you'd prefer, there's also `/Silverware/acro_only.uvprojx` already included for those who wish. If you don't know what "Acro Only" means offhand, I'd recommend using `silverware.uvprojx` to begin with.  
-	If this is your first time opening the project, Keil uVision may ask to install device support if not present. If so, click "install", and wait for completion, which may take some time as it is downloaded.  
-
-	* This should install the `STM32F030` CPU support pack. There's a package installer tool in the IDE that can be tried as well, should the autodownload fail.
+	
+	* If this is your first time opening the project, Keil uVision may ask to install device support if not present. If so, click "install", and wait for completion, which may take some time as it is downloaded.  
+	  This should install the `STM32F030` CPU support pack. There's a package installer tool in the IDE that can be tried as well, should the autodownload fail.
 
 
 3. Change the settings to your preference, generally using `config.h`.  
-    For workshop-defaults, you'll want to enable `#USE_STOCK_TX` on line 120, as well as set the protocol to one of the Bayang ones. It should be good as-is.
+    For workshop-defaults, you'll want to enable `#USE_STOCK_TX` on line 120.  
+    Set the protocol to one of the Bayang ones. It should be good as-is.
 
 4. Compile the project and make sure there are zero errors reported in the lower part of the window. Use either the "build" toolbar icon, menu "project/build target" or "F7" hotkey. Keil will also save changes to files at his point.
 
@@ -136,7 +137,7 @@ Flashing is the process of saving the opensource firmware to the board, so that 
 
 ### Preparing the hardware:
 
-The quad is flashed using a st-link v2, included with your kit. The FC is fitted with a socket:
+The quad is flashed using a ST-Link v2, included with your kit. The FC is fitted with a socket:
 
 ![Picture of socket](/images/placeholder.jpg)
 
@@ -156,8 +157,7 @@ If you're using the included Header Jumper, it should plug neatly into the Jumpe
 *Do Not* connect both the +5V pin if the battery is also connected. This *will* damage the board
 
 If connector is not available, wires can be soldered to the board instead. Note that the CLK and DAT labels on the Flight Controller are reversed.  
-3 wires are needed, Ground ( GND) , CLK ( SWCLK on stlink) and DAT( SWDIO on stlink). Connect the pads / plug to the equivalent place on the st-link: GnD <-> Gnd , DAT <-> SWCLK and CLK <-> SWDIO.
-
+3 wires are needed, Ground ( GND) , CLK ( SWCLK on stlink) and DAT( SWDIO on stlink). Connect the pads / plug to the equivalent place on the ST-Link: GnD <-> Gnd , DAT <-> SWCLK and CLK <-> SWDIO.
 
 At this stage, we'll assume you have a compiled firmware you wish to flash. This may be from the Firmware Compilation step above, or it may be a precompiled firmware. Either way, make sure you have something to upload after erasing the factory firmware.
 
@@ -167,7 +167,7 @@ If this is the first time you're flashing new firmware, the factory firmware has
 
 The pristine factory firmware cannot be restored after this step. However, there is a factory-like firmware included in the `/bin/` folder of this repo.
 
-1. Connect the board to the st-link. Do not connect the 5V pin from the ST-Link - we'll be getting power from a battery for this step.
+1. Connect the board to the ST-Link. Do not connect the 5V pin from the ST-Link - we'll be getting power from a battery for this step.
     You need to complete the next step within a few seconds because current firmware repurposes the programming port to control a camera. If you can't connect, cycle power and try again.
 
 2. Using the St-utility, connect to the board. You should get a message saying the board is protected ( "Cannot read memory").
@@ -185,18 +185,13 @@ The pristine factory firmware cannot be restored after this step. However, there
 
 ### Flashing a new firmware:
 
-1. Connect the st-link to the board, and connect power. This may use either the 5V pin or the battery, **but not both**.
+1. Connect the ST-Link to the board, and connect power. This may use either the 5V pin or the battery, **but not both**.
 
-2. Open the St-link Utility program , and press the "connect" button. The program should show connection progress in the bottom part.
+2. Open the ST-Link Utility program , and press the "connect" button. The program should show connection progress in the bottom part.
 
 3. In the target menu, select "Program and verify" or "program". A popup will ask for the file to program. Select the firmware downloaded or compiled `.hex` firmware file here. After the file selection, click start, and wait a few seconds for the process to complete.
 
-The new firmware is flashed at this point, and it can be used.
-
-
-The board pads ( near the middle ) are *reverse* labeled. The 4 pin connector is *correctly* labeled.
-
-Thanks to rcg user "NotfastEnough" for figuring out the hardware connctions
+The new firmware is flashed at this point, and the drone is ready to be used.
 
 
 ### Gestures
