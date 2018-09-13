@@ -142,7 +142,7 @@ The quad is flashed using a st-link v2, included with your kit. The FC is fitted
 
 The Header Jumper and Jumper Wires should be connected to the ST-Link. The Header Jumper wires should (through the Jumper Wires) be connected as such:  
 | Color   | Pin                 |  
-| ------- | -------------------:|  
+| ------- | ------------------: |  
 | Red     | 5V or disconnected  |  
 | Black   | Gnd                 |  
 | Yellow  |  somewhere          |  
