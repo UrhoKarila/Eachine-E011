@@ -70,6 +70,7 @@ The one included in your kit is availble for purchase [here](https://www.banggoo
 ### Spare properllers
 
 Useful if you fly the drone enough to warrant replacing the motors. There are 2 different chiralities on these - bear that in mind when replacing them.
+
 ![Placeholder image of propellers](/images/placeholder.jpg)
 
 ### Screwdriver
@@ -81,6 +82,7 @@ Small philips-head screwdriver. Can be used for removing the screw that holds th
 ### Off-brand LEGO-style knight
 
 Probably the most valuable piece of this kit. Take care not to lose him. What would you do without his slightly walleyed smirk?
+
 ![Placeholder image of knight](/images/placeholder.jpg)
 
 
@@ -93,14 +95,17 @@ Much of this section is taken from the [source thread on RC groups](https://www.
 ### Install Keil MDK from http://www2.keil.com/mdk5  
 
 There ought to be a button labelled `Download MDK v*`. At the time of writing, it looks like this:  
+
 [!An image of the download button](/images/download.png)
+
 Note: right click the downloaded file and select "run as administrator", or there may not be enough folder access rights.
 
 ### Download and install the "St-link Utility" from https://www.st.com/en/development-tools/stsw-link004.html
 This will also install drivers for the st-link, and is used to upload the precompiled firmware to the board.
 
 The download link is near the bottom of the page, and looks like this: 
-![An image of the STLink download](/images/st-download.png)
+
+![An image of the STLink download](/images/st-download.PNG)
 
 
 ## Firmware Compilation
@@ -111,9 +116,11 @@ Assuming the installation process was performed correctly, we will now use Keil 
 Unzip to a folder of your choice.
 
 2. Open project file `/Silverware/silverware.uvprojx` in the Keil uVision program. This can be done by double-clicking on the file. 
-    If you'd prefer, there's also `/Silverware/acro_only.uvprojx` already included for those who wish. If you don't know what "Acro Only" means offhand, I'd recommend using `silverware.uvprojx` to begin with.  
-If this is your first time opening the project, Keil uVision may ask to install device support if not present. If so, click "install", and wait for completion, which may take some time as it is downloaded.  
-This should install the `STM32F030` CPU support pack. There's a package installer tool in the IDE that can be tried as well, should the autodownload fail.
+
+    * If you'd prefer, there's also `/Silverware/acro_only.uvprojx` already included for those who wish. If you don't know what "Acro Only" means offhand, I'd recommend using `silverware.uvprojx` to begin with.  
+	If this is your first time opening the project, Keil uVision may ask to install device support if not present. If so, click "install", and wait for completion, which may take some time as it is downloaded.  
+
+	* This should install the `STM32F030` CPU support pack. There's a package installer tool in the IDE that can be tried as well, should the autodownload fail.
 
 
 3. Change the settings to your preference, generally using `config.h`.  
@@ -136,20 +143,20 @@ The quad is flashed using a st-link v2, included with your kit. The FC is fitted
 ![Picture of socket](/images/placeholder.jpg)
 
 The Header Jumper and Jumper Wires should be connected to the ST-Link. The Header Jumper wires should (through the Jumper Wires) be connected as such:  
-|Color    | Pin  |
-|---------|------|
-| Red     | 5V or disconnected  |
-| Black   | Gnd  |
-| Yellow  |      |
-| White   |      |
+|Color    | Pin  				|  
+|---------|---------------------|  
+| Red     | 5V or disconnected  |  
+| Black   | Gnd  				|  
+| Yellow  |  somewhere			|  
+| White   |		somewhere      	|  
 
 If you're using the included Header Jumper, it should plug neatly into the Jumper Wires. When attached, it should look like this:
 
 ![Placeholder image](/images/placeholder.jpg)
 
-*Do Not* connect both the +5V pin if the battery is also connected. This *Will* damage the board
+*Do Not* connect both the +5V pin if the battery is also connected. This *will* damage the board
 
-If connector is not available, wires can be soldered to the board instead. Note that the CLK and DAT labels on the Flight Controller are reversed.
+If connector is not available, wires can be soldered to the board instead. Note that the CLK and DAT labels on the Flight Controller are reversed.  
 3 wires are needed, Ground ( GND) , CLK ( SWCLK on stlink) and DAT( SWDIO on stlink). Connect the pads / plug to the equivalent place on the st-link: GnD <-> Gnd , DAT <-> SWCLK and CLK <-> SWDIO.
 
 
@@ -159,16 +166,16 @@ At this stage, we'll assume you have a compiled firmware you wish to flash. This
 
 If this is the first time you're flashing new firmware, the factory firmware has to be erased. This step only needs to be performed once, it does not need to be done every time the board is flashed.
 
-The pristine factory firmware cannot be restored after this step. However, there is a factory-like firmware included in the `bin` folder of this repo.
+The pristine factory firmware cannot be restored after this step. However, there is a factory-like firmware included in the `/bin/` folder of this repo.
 
 1. Connect the board to the st-link. Do not connect the 5V pin from the ST-Link - we'll be getting power from a battery for this step.
-    You need to complete the next step within a few seconds because current firmware re purpuses the programming port to control a camera ( they share the pins). If you can't connect, cycle power and try again.
+    You need to complete the next step within a few seconds because current firmware repurposes the programming port to control a camera. If you can't connect, cycle power and try again.
 
 2. Using the St-utility, connect to the board. You should get a message saying the board is protected ( "Cannot read memory").
 
 3. In the Target menu, select "Option bytes".
 
-    1. Select "Level 0" ( Should have been Level 1 originally )
+    1. Select "Level 0" ( Should have been Level 1 originally )  
     Do not select an incorrect Level and apply it as it will kill the board.
 
 	2. **Double check you have "level 0" selected**
