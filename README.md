@@ -81,9 +81,7 @@ Small philips-head screwdriver. Can be used for removing the screw that holds th
 
 ### Off-brand LEGO-style knight
 
-Probably the most valuable piece of this kit. Take care not to lose him. What would you do without his slightly walleyed smirk?
-
-![Placeholder image of knight](/images/placeholder.jpg)
+![Probably the most valuable piece of this kit. Take care not to lose him. What would you do without his slightly walleyed smirk?](/images/placeholder.jpg)
 
 
 ## Compiling firmware
@@ -96,7 +94,7 @@ Much of this section is taken from the [source thread on RC groups](https://www.
 
 There ought to be a button labelled `Download MDK v*`. At the time of writing, it looks like this:  
 
-[!An image of the download button](/images/download.png)
+![An image of the download button](/images/download.png)
 
 Note: right click the downloaded file and select "run as administrator", or there may not be enough folder access rights.
 
@@ -143,12 +141,12 @@ The quad is flashed using a st-link v2, included with your kit. The FC is fitted
 ![Picture of socket](/images/placeholder.jpg)
 
 The Header Jumper and Jumper Wires should be connected to the ST-Link. The Header Jumper wires should (through the Jumper Wires) be connected as such:  
-|Color    | Pin  				|  
-|---------|---------------------|  
+|Color    | Pin                 |  
+| --------|---------------------|  
 | Red     | 5V or disconnected  |  
-| Black   | Gnd  				|  
-| Yellow  |  somewhere			|  
-| White   |		somewhere      	|  
+| Black   | Gnd                 |  
+| Yellow  |  somewhere          |  
+| White   |	    somewhere       |  
 
 If you're using the included Header Jumper, it should plug neatly into the Jumper Wires. When attached, it should look like this:
 
