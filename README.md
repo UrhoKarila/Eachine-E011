@@ -110,7 +110,7 @@ The download link is near the bottom of the page, and looks like this:
 
 Assuming the installation process was performed correctly, we will now use Keil to compile a "binary", file containing the firmware of the quadcopter. This step will transform the C code that we've written into a binary format grokkable by the quadcopter's cpu.
 
-1. Download the project files from this repo, if you haven't already. I'm not going to link it, because you're already here.  
+1. Download or clone the project files from this repository, if you haven't already.  
 Unzip to a folder of your choice.
 
 2. Open project file `/Silverware/silverware.uvprojx` in the Keil uVision program. This can be done by double-clicking on the file. 
@@ -137,7 +137,7 @@ Flashing is the process of saving the opensource firmware to the board, so that 
 
 ### Preparing the hardware:
 
-The quad is flashed using a ST-Link v2, included with your kit. The FC is fitted with a socket:
+The quad is flashed using a ST-Link v2, included with your kit. The quad's flight controller is fitted with a socket:
 
 ![Picture of socket](/images/header-jumper-connections.jpg)
 
@@ -167,7 +167,7 @@ At this stage, we'll assume you have a compiled firmware you wish to flash. This
 
 If this is the first time you're flashing new firmware, the factory firmware has to be erased. This step only needs to be performed once, it does not need to be done every time the board is flashed.
 
-The pristine factory firmware cannot be restored after this step. However, there is a factory-like firmware included in the `/bin/` folder of this repo.
+The pristine factory firmware cannot be restored after this step. However, there is a factory-like firmware included in the `/bin/` folder of this repository.
 
 1. Connect the board to the ST-Link. Do not connect the 5V pin from the ST-Link - we'll be getting power from a battery for this step.
     You need to complete the next step within a few seconds because current firmware repurposes the programming port to control a camera. If you can't connect, cycle power and try again.
