@@ -8,31 +8,31 @@ Included in your kits should be a variety of hardware. They are they following:
 The main piece of equipment required for this operation. These are the E011 quads - the ones for the workshop were obtained [here](https://www.banggood.com/Eachine-E011-Mini-2_4G-Headless-Mode-With-60000RPM-716-Coreless-Motor-Toy-Brick-RC-Quadcopter-RTF-p-1135724.html?rmmds=search).  
 They are also available on amazon, or from other sellers.
 
-![Placeholder Image](/images/placeholder.jpg)
+![Quadcopter](/images/quadcopter.jpg)
 
 If you've obtained the quadcopter through the workshop, it should have been modified with a 4-pin header across the UART programming pins. 
 The header is polarized, so take careful note of its orientation on the board. If yours is the opposite direction of what is shown here, you'll want to reverse the order of Jumper Wire connections to the ST-Link.
 That header should look like this once installed: 
 
-![Placeholder image](/images/placeholder.jpg)
+![Image of the header](/images/header.jpg)
 
 ### Transmitter
 A small control transmitter included with the quadcopter. Replacing this usually means buying a new quadcopter -- transmitters are not sold seperately.  
 If you have a radio with an XJT module bay, this can be replaced with multiprotocol modules that are compatible with the Bayang protocol.
 
-![Transmitter placeholder image](/images/placeholder.jpg)
+![Transmitter image](/images/transmitter.jpg)
 
 
 ### Batteries
 The stock battery for the E011 is a single cell 260mAh Lithium Polymer battery. If you've lost yours, they are available in small quantites from a variety of sellers. `260mah lipo` is a decent start for googling.
 
-![Placeholder Image](/images/placeholder.jpg)
+![Battery Image](/images/battery.jpg)
 
 ### Battery charger
 Keep this around. It can be used to recharge the LiPo battery for the drone.
 Replacement chargers should be available with most replacement batteries should you lose it.
 
-![Charger placeholder](/images/placeholder.jpg)
+![Charger image](/images/charger.jpg)
 
 ### ST-Link
 The ST-Link v2 is used to write data from the computer to the quadcopter. These are widely available and can be found, for example, [here](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.XST-Link.TRS0&_nkw=ST-Link&_sacat=0)
@@ -52,13 +52,13 @@ Also in your kit is a jumper wire. This is harder to replace, so take care not t
 One end of the jumper is terminated with a fairly no-name 1.25mm pitch 4 pin polarized connector, similar to [this one](https://smile.amazon.com/1-25mm-Polarized-Connector-5-9inch-Skywalking/dp/B00HTIV6G8).  
 The other is crimped into a 4-posiiton male connector compatible with the Jumper Wires included above.
 
-![Placeholder image](/images/placeholder.jpg)
+![Header Jumper image](/images/header-jumper.jpg)
 
 ### Voltmeter
 
 A small PCB with a 3-position 7-segment display. There should be a plug compatible with the battery -- this is a useful tool for determining battery voltage
 
-![Placeholder image](/images/placeholder.jpg)
+![voltmeter image](/images/voltmeter.jpg)
 
 ### Lipo Safety bag
 
@@ -71,17 +71,17 @@ The one included in your kit is availble for purchase [here](https://www.banggoo
 
 Useful if you fly the drone enough to warrant replacing the motors. There are 2 different chiralities on these - bear that in mind when replacing them.
 
-![Placeholder image of propellers](/images/placeholder.jpg)
+![image of propellers](/images/propellers.jpg)
 
 ### Screwdriver
 
 Small philips-head screwdriver. Can be used for removing the screw that holds the battery bay door closed on your transmitter, or removing the screws that hold the flight controller to the frame.
 
-![Placeholder image of a screwdriver](/images/placeholder.jpg)
+![image of a screwdriver](/images/screwdriver.jpg)
 
 ### Off-brand LEGO-style knight
 
-![Probably the most valuable piece of this kit. Take care not to lose him. What would you do without his slightly walleyed smirk?](/images/placeholder.jpg)
+![Probably the most valuable piece of this kit. Take care not to lose him. What would you do without his slightly walleyed smirk?](/images/lego-knight.jpg)
 
 
 ## Compiling firmware
@@ -139,20 +139,22 @@ Flashing is the process of saving the opensource firmware to the board, so that 
 
 The quad is flashed using a ST-Link v2, included with your kit. The FC is fitted with a socket:
 
-![Picture of socket](/images/placeholder.jpg)
+![Picture of socket](/images/header-jumper-connections.jpg)
 
 The Header Jumper and Jumper Wires should be connected to the ST-Link. The Header Jumper wires should (through the Jumper Wires) be connected as such:  
 
 | Color   | Pin                 |  
 | ------- | ------------------: |  
-| Red     | 5V or disconnected  |  
-| Black   | Gnd                 |  
-| Yellow  |  somewhere          |  
-| White   |	    somewhere       |  
+| Red     | GND                 |  
+| Black   | 5V or disconnected  |  
+| Yellow  | SWDIO               |  
+| White   |	SWCLK               |  
+
+Note: the black and red wires aren't attached to their conventional connections.
 
 If you're using the included Header Jumper, it should plug neatly into the Jumper Wires. When attached, it should look like this:
 
-![Placeholder image](/images/placeholder.jpg)
+![Quadcopter attached to the Header Jumper, Jumper Wires, and ST-Link](/images/quadcopter-stlink-connection.jpg)
 
 *Do Not* connect both the +5V pin if the battery is also connected. This *will* damage the board
 
