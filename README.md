@@ -37,7 +37,7 @@ Replacement chargers should be available with most replacement batteries should 
 ### ST-Link
 The ST-Link v2 is used to write data from the computer to the quadcopter. These are widely available and can be found, for example, [here](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR12.TRC2.A0.H0.XST-Link.TRS0&_nkw=ST-Link&_sacat=0)
 
-![Picture of STLinkv2](/images/ST-Link-v2-programmer-for-stm8-stm32.jpg)
+![Picture of STLinkv2](/images/st-link-v2-programmer-for-stm8-stm32.jpg)
 
 As part of the utility of the ST-Link, there are two sets of wires to keep track of.
 
