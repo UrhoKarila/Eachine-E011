@@ -156,7 +156,7 @@ If you're using the included Header Jumper, it should plug neatly into the Jumpe
 
 ![Quadcopter attached to the Header Jumper, Jumper Wires, and ST-Link](/images/quadcopter-stlink-connection.jpg)
 
-*Do Not* connect both the +5V pin if the battery is also connected. This *will* damage the board
+*Do Not* connect the +5V pin if the battery is also connected. This *will* damage the board
 
 If connector is not available, wires can be soldered to the board instead. Note that the CLK and DAT labels on the Flight Controller are reversed.  
 3 wires are needed, Ground ( GND) , CLK ( SWCLK on stlink) and DAT( SWDIO on stlink). Connect the pads / plug to the equivalent place on the ST-Link: GnD <-> Gnd , DAT <-> SWCLK and CLK <-> SWDIO.
@@ -171,6 +171,10 @@ The pristine factory firmware cannot be restored after this step. However, there
 
 1. Connect the board to the ST-Link. Do not connect the 5V pin from the ST-Link - we'll be getting power from a battery for this step.
     You need to complete the next step within a few seconds because current firmware repurposes the programming port to control a camera. If you can't connect, cycle power and try again.
+
+    * If you're having issues connecting, double check your wiring to ensure there's nothing crossed.
+
+    * Sometimes, the ST-Link utility will refuse to connect and advise switching to the `Connect Under Reset` mode. I found that switching to hot-plug has helped, in this case.
 
 2. Using the St-utility, connect to the board. You should get a message saying the board is protected ( "Cannot read memory").
 
