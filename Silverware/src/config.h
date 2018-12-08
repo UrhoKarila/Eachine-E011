@@ -7,7 +7,7 @@
 // rate in deg/sec
 // for acro mode
 #define MAX_RATE 360.0
-#define MAX_RATEYAW 360.0
+#define MAX_RATEYAW 540.0
 
 // max angle for level mode
 #define MAX_ANGLE_HI 55.0f
@@ -170,9 +170,9 @@
 //#define RX_CG023_PROTOCOL
 //#define RX_H7_PROTOCOL
 //#define RX_BAYANG_PROTOCOL
-#define RX_BAYANG_PROTOCOL_TELEMETRY
+//#define RX_BAYANG_PROTOCOL_TELEMETRY
 //#define RX_BAYANG_PROTOCOL_BLE_BEACON
-//#define RX_BAYANG_BLE_APP
+#define RX_BAYANG_BLE_APP
 //#define RX_CX10BLUE_PROTOCOL
 //#define RX_SBUS
 
@@ -186,7 +186,7 @@
 
 // led brightness in-flight ( solid lights only)
 // 0- 15 range
-#define LED_BRIGHTNESS 15
+#define LED_BRIGHTNESS 9
 
 
 // external buzzer - pins in hardware.h
